@@ -1,0 +1,14 @@
+:root{
+    /* col setting begin */
+    --im-content-padding: 10px;
+    --im-row-margin: calc(var(var(--im-content-padding) * -1));
+    /* col setting end */   
+    --im-body-bg                 : #272822;
+    --im-color-white-font        : #ffffff;
+    --im-color-white-font-active : #c5005c;
+    --im-color-dark-font         : #000000;
+    --im-color-dark-font-active  : var(--im-color-white-font-active);
+    --im-hamburger-bar-bg        : #ffffff;
+    --im-hamburger-bar-active-bg : #eeb600;
+    --im-loader-color-font       : #ca8300;
+}

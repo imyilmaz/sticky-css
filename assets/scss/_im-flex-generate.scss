@@ -1,0 +1,33 @@
+
+@mixin imFlexGenerate($flexible,$media,$screen){
+    @media (max-width:#{$media}px){
+        @for $i from 1 through $flexible{
+            .col-#{$screen}-#{$i}{
+                display: block;
+                flex: 0 0 calc(100% / $flexible * $i);
+                max-width: calc(100% / $flexible * $i);
+            }
+        }
+    }
+} 
+
+@include imFlexGenerate(12,1920,md);
+
+.container{
+    width: 100%; 
+    max-width: 1920px;
+    padding-left: var(--im-content-padding);
+    padding-right: var(--im-content-padding);
+    margin-left: auto;
+    margin-right: auto;
+    >.row{
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: var(--im-row-margin);
+        margin-right: var(--im-row-margin);
+        >[class*="col"]{
+            padding-left: var(--im-content-padding);
+            padding-right: var(--im-content-padding);
+        }
+    }
+}

@@ -1,4 +1,195 @@
+@import 'root';
 @import 'base';
+@import 'im-flex-generate';
+
+.header{
+	position: absolute;
+	top: 0;
+	z-index: 53;
+	width: 100%;
+	background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0px 6px rgba(0,0,0,.2);
+    .nav{
+        >ul{
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            >li{
+                position: relative;
+                >a{
+                    position: relative;
+                    z-index: 5;
+                    display: block;
+                    font-size: 1rem;
+                    line-height: 1;
+                    color: var(--im-color-dark-font);
+                    padding: 2rem 1rem;
+                    transition: .4s;
+                    &:hover{
+                        color: var(--im-color-white-font-active);
+                    }
+                }
+                >.loverlay{ 
+                    position: fixed; 
+                    top: 80px;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    background: rgba(0, 0, 0, 0.3); 
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: .4s; 
+					z-index: -1;
+                }
+                >.sub-menu{
+                    position: absolute;
+                    left: 0;
+                    top: 100%;
+                    min-width: 300px;
+                    opacity: 0;
+                    pointer-events: none;
+                    transform: translateY(-50px) translateX(0px);
+                    transition: .4s;
+                    background: #f1f1f1;
+                    >ul{
+                        li{
+                            a{
+                                display: block;
+                                font-size: .875rem;
+                                line-height: 1;
+                                color: var(--im-color-dark-font);
+                                padding: 1rem;
+                                transition: .4s;
+                                &:hover{
+                                    color: var(--im-color-dark-font-active);
+                                    padding: 1rem .5rem 1rem 1.5rem;
+                                } 
+                            }
+                        }
+                    }
+                }
+                &:hover{
+                    >.sub-menu{
+                        opacity: 1;
+                        transform: translateY(0);
+                        pointer-events: all;
+                    }
+                    >.loverlay{
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }//nav
+	&-fixed{ 
+		position: fixed; 
+		transition-duration: 1s; 
+		transition-delay: 0s; 
+		transition-timing-function: cubic-bezier(1, 0, .25, 1); 
+	}
+	&-hidden{ 
+		transform: translateY(-110%); 
+		&~.container{
+			.sidebar{
+				top: 20px;
+			}
+		}
+	}
+}//header
+
+
+.animate-loader{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    z-index: 64;
+    opacity: 1;
+    &:before{
+        content: "POSITION";
+        font-size: 10vw;
+        width: 90%;
+        text-align: center;
+        font-weight: bold;
+        color: var(--im-loader-color-font);
+        position: absolute;
+        left: 50%;
+        bottom: 50%; 
+        transform: translate(-50%, -50px);
+        animation: {
+            name: css-only;
+            duration: 4s;
+            direction: alternate;
+            timing-function: linear;
+            iteration-count: infinite;
+        } 
+    }
+    &:after{
+        content: "STICKY";
+        font-size: 10vw;
+        width: 90%;
+        text-align: center;
+        font-weight: bold;
+        color: var(--im-loader-color-font);
+        position: absolute;
+        left: 50%;
+        top: 50%; 
+        transform: translate(-50%, -50px);
+        animation: {
+            name: css-only;
+            duration: 4s;
+            direction: alternate;
+            timing-function: linear;
+            iteration-count: infinite;
+        } 
+    }
+    animation: {
+        name: hidden-animate;
+        duration: 1s;
+        delay: 1.5s;
+        direction: alternate;
+        timing-function: linear;
+        fill-mode: both;
+        iteration-count: 1;
+    } 
+}
+
+.container{
+	max-width: 1200px;
+}
+section{
+	&#section-1{ padding-top: 150px;}
+    width: 100%;
+}
+.sidebar{
+	position: sticky;
+	top: 100px;
+	margin-top: 150px;
+	background: #f1f1f1;
+	transition-duration: 1s; 
+	transition-delay: 0s; 
+	transition-timing-function: cubic-bezier(1, 0, .25, 1); 
+	ul{
+		li{
+			a{
+				position: relative;
+				z-index: 5;
+				display: block;
+				font-size: 1rem;
+				line-height: 1;
+				color: var(--im-color-dark-font);
+				padding: 2rem 1rem;
+				transition: .4s;
+				&:hover{
+					color: var(--im-color-white-font-active);
+				}
+			}
+		}
+	}
+}
+
 @for $i from 1 through 400 {
 	$red: random(255);
 	$green: random(255);
@@ -14,39 +205,32 @@
 	grid-row-end: span $r;
 }
 
-body {
-	color: #222;
-	font-size: 2vw;
-    font-weight: 800;
-	text-shadow: 1px 2px #eee;
-    box-sizing: content-box;
-    background: #f1f1f1;
-}
-
+ 
 main {
 	width: 100%;
 	margin: auto;
 	display: grid;
 	grid-template-columns: repeat(8, 1fr);
     gap: 1px;
-}
-
-div {
-	box-sizing: border-box;
-	border: .5vw solid #fff;
-	width: 100%;
-	min-height: 12.5vw;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	&:not(:empty){
-		position: sticky;
-		top: 0;
-		&.big{
-			top: calc(12.5vw + 1px);
+	div {
+		box-sizing: border-box;
+		border: .5vw solid #fff;
+		width: 100%;
+		min-height: 12.5vw;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		&:not(:empty){
+			position: sticky;
+			top: 80px;
+			&.big{
+				top: calc(12.5vw + 1px + 80px);
+			}
 		}
 	}
 }
+
+
 
 .big {
 	@include bigger(2, 2);
@@ -60,3 +244,8 @@ div {
 	@include bigger(4, 4);
 	font-size: 2em;
 }
+
+
+
+// responsive import'unun en sonda olduğuna emin olun.
+@import 'responsive';
